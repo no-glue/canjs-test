@@ -96,3 +96,7 @@ h1 {
 #create .contact .remove {
 	display: none;
 }
+
+.margin-top-16px {
+	margin-top: 16px;
+};

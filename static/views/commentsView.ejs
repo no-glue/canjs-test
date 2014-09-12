@@ -1,9 +1,22 @@
-<ul class="unstyled clearfix">
+<div class="hero-unit contact span8">
+  <div class="row">
+    <div class="span8">
+      <input type="text" name="comment" placeholder="Add Comment" />
+    </div>
+  </div>
+  <div class="row margin-top-16px">
+    <div class="span8">
+      <div class="buttons">
+          <a href="javascript://" class="btn btn-primary save">Save</a>
+          <a href="javascript://" class="btn cancel">Cancel</a>
+      </div>
+    </div>
+  </div>
   <% list(comments, function(comment){ %>
-    <li class="contact span8">
-        <div class="">
-          <%== can.view.render('/static/views/commentsSingle', { comment: comment}) %>
-        </div>
-    </li>
+  <div class="row margin-top-16px">
+    <div class="contact span4">
+      <%== can.view.render('/static/views/commentsSingle', { comment: comment}) %>
+    </div>
+  </div>
   <% }) %>
-</ul>
+</div>

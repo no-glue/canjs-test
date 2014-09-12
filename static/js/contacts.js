@@ -92,6 +92,7 @@
     
     Create = can.Control({
       // this piece of shit creates new contact
+      // it's a fuckin button
         show: function(){
             this.contact = new Contact();
             this.element.html(can.view('/static/views/createView.ejs', {
