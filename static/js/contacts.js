@@ -24,6 +24,13 @@
         },
         count: function(category){
             return this.filter(category).length;
+        },
+        find: function(id) {
+          var found = {};
+          this.each(function(contact, i) {
+            if(contact.attr('id') == id) found = contact;
+          });
+          return found;
         }
     });
     
@@ -62,7 +69,6 @@
         // pretty much reads attribute category and gives contacts
         init: function(){
             var category = can.route.attr('category') || "all";
-            console.log('fucking filter');
             this.element.html(can.view('/static/views/filterView', {
                 contacts: this.options.contacts,
                 categories: this.options.categories
@@ -80,11 +86,11 @@
       // it shows comments for a contact
       init: function() {
         // this responds when comments is created
-        this._show(can.route.attr('contact_id') || 0);
+        can.route.attr('contact_id') && this._show(this.options.contacts.find(can.route.attr('contact_id')));
       },
       'comments/:contact_id route': function(data) {
         // should respond to comments route
-        this._show(data.contact_id || 0);
+        this._show(this.options.contacts.find(data.contact_id));
       },
       'route': function(data) {
         // empty root, clear this
@@ -94,11 +100,22 @@
         // also clear
         this.element.html('');
       },
-      _show: function(contact_id) {
+      '{Comment} created': function(list, ev, comment) {
+        // comment created
+        list.push(comment);
+        this.show(comment.contact_id);
+      },
+      '.save click': function(el) {
+        // save clicked
+        var contact = el.closest('.thiscontact').data('contact');
+        contact.attr(can.deparam(this.element.find('form').serialize())).save();
+        this._show(contact);
+      },
+      _show: function(contact) {
         // show the view
-        if(contact_id) {
+        if(contact) {
           this.element.html(can.view('/static/views/commentsView.ejs', {
-            comments: ['fuck you', 'gonna kill you']
+            contact: contact
           })); 
         }
       }

@@ -25,12 +25,13 @@ def index():
 def create_read_contact():
     d = []
     if request.method == 'GET':
-        d = [{'id': unicode(c['_id']), 'name': c['name'], 'address': c['address'], 'email': c['email'], 'phone': c['phone'],'category': c['category']} for c in coll.find()]
+        d = [{'id': unicode(c['_id']), 'name': c['name'], 'address': c['address'], 'email': c['email'], 'phone': c['phone'],'category': c['category'], 'comment': c['comment']} for c in coll.find()]
     if request.method == 'POST':
         req = request.form
         post = {}
         for k,v in req.items():
             post[k] = v
+        post['comment'] = ''
         c = coll.save(post)
         d = {'id': unicode(c)}
     resp = make_response(json.dumps(d))

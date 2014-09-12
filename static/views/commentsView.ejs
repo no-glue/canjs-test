@@ -1,22 +1,21 @@
 <div class="hero-unit contact span8">
-  <div class="row">
-    <div class="span8">
-      <input type="text" name="comment" placeholder="Add Comment" />
-    </div>
-  </div>
-  <div class="row margin-top-16px">
-    <div class="span8">
-      <div class="buttons">
-          <a href="javascript://" class="btn btn-primary save">Save</a>
-          <a href="javascript://" class="btn cancel">Cancel</a>
+  <form>
+    <div class="row">
+      <div class="span8">
+        <textarea name="comment" placeholder="Add Comment"></textarea>
       </div>
     </div>
-  </div>
-  <% list(comments, function(comment){ %>
-  <div class="row margin-top-16px">
+    <div class="row margin-left-10px margin-top-16px">
+      <div class="span8">
+        <div class="thiscontact buttons" <%= (el)-> el.data('contact', contact) %>>
+            <a href="javascript://" class="btn btn-primary save">Save</a>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="row margin-left-10px margin-top-16px">
     <div class="contact span4">
-      <%== can.view.render('/static/views/commentsSingle', { comment: comment}) %>
+      <%== can.view.render('/static/views/commentsSingle', { comment: contact.comment}) %>
     </div>
   </div>
-  <% }) %>
 </div>
