@@ -1,7 +1,7 @@
 canjs
 =====
 
-Contacts tutorial from CanJS with Flask backend
+Contacts with CanJS and Flask backend
 
 Requirements:
 Flask
