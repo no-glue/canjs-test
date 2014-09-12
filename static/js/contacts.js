@@ -58,8 +58,11 @@
     });
     
     Filter = can.Control({
+        // this is the filter that responds to filter url
+        // pretty much reads attribute category and gives contacts
         init: function(){
             var category = can.route.attr('category') || "all";
+            console.log('fucking filter');
             this.element.html(can.view('/static/views/filterView', {
                 contacts: this.options.contacts,
                 categories: this.options.categories
@@ -72,8 +75,23 @@
             can.route.attr('category', el.data('category'));
         }
     });
+
+    Comments = can.Control({
+      // it shows comments for a contact
+      init: function() {
+        // this responds when comments is created
+        var contact_id = can.route.attr('contact_id') || 0;
+        if(contact_id) {
+          console.log('contact_id', contact_id);
+          this.element.html(can.view('/static/views/commentsView.ejs', {
+            comments: ['fuck you', 'gonna kill you']
+          }));
+        }
+      }
+    });
     
     Create = can.Control({
+      // this piece of shit creates new contact
         show: function(){
             this.contact = new Contact();
             this.element.html(can.view('/static/views/createView.ejs', {
@@ -110,6 +128,10 @@
     })
     
     can.route( 'filter/:category' )
+    // this is a route for filtering contacts according to category
+    // basically you got a category and get corresponding contacts, that's it
+    can.route('comments/:contact_id')
+    // this gives comments for a contact, that's it
     can.route('', {category: 'all' })
     
     $(document).ready(function(){
@@ -126,6 +148,11 @@
           new Filter('#filter', {
               contacts: contacts,
               categories: categories
+          });
+
+          new Comments('#comments', {
+            contacts: contacts,
+            categories: categories
           });
           
           new Create('#create', {

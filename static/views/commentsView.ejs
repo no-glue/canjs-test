@@ -1,0 +1,9 @@
+<ul class="unstyled clearfix">
+  <% list(comments, function(comment){ %>
+    <li class="contact span8">
+        <div class="">
+          <%== can.view.render('/static/views/commentsSingle', { comment: comment}) %>
+        </div>
+    </li>
+  <% }) %>
+</ul>
