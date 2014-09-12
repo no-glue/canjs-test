@@ -27,4 +27,11 @@
       <%= contact.attr('email') ? "value='" + contact.email + "'" : "class='empty'" %>>
   </div>
 </div>
+<div class="row margin-top-16px">
+    <div class="span8">
+      <div class="buttons">
+          <a href="#!comments/<%= contact.id%>" class="btn btn-primary comments">Comments</a>
+      </div>
+    </div>
+  </div>
 </form>

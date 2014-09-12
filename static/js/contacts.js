@@ -80,12 +80,26 @@
       // it shows comments for a contact
       init: function() {
         // this responds when comments is created
-        var contact_id = can.route.attr('contact_id') || 0;
+        this._show(can.route.attr('contact_id') || 0);
+      },
+      'comments/:contact_id route': function(data) {
+        // should respond to comments route
+        this._show(data.contact_id || 0);
+      },
+      'route': function(data) {
+        // empty root, clear this
+        this.element.html('');
+      },
+      'filter/:category route': function(data) {
+        // also clear
+        this.element.html('');
+      },
+      _show: function(contact_id) {
+        // show the view
         if(contact_id) {
-          console.log('contact_id', contact_id);
           this.element.html(can.view('/static/views/commentsView.ejs', {
             comments: ['fuck you', 'gonna kill you']
-          }));
+          })); 
         }
       }
     });
