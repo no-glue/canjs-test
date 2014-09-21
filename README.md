@@ -13,6 +13,6 @@ MongoDB (see [here](https://www.digitalocean.com/community/tutorials/how-to-inst
   
 How to run
 =====
-py app.py (py - if shorthand enabled)
+python app.py
 
 go to localhost:9999
